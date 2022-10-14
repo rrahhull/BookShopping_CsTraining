@@ -1,0 +1,44 @@
+﻿@model BookShopping_Project.Models.Category
+@{
+    var title = (Model.id == 0 ? "New Category" : "Edit Category");
+    @*var title = "New Category";*@
+}
+@*@if (Model != 0)
+    {
+        title="Edit Category"
+    } *@
+
+<form method="post">
+    <div class="row">
+        <div class="col-12 border-bottom">
+            <h2 class="text-primary">@title</h2>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="border col-8">
+                <div class="form-group row p-2 m-2">
+                    <div class="col-4">
+                        <label asp-for="name"></label>
+                    </div>
+                    <div class="col-4">
+                        <input asp-for="name" />
+                        <span asp-validation-for="name" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row p-2 m-2">
+            <div class="col-4 offset-2">
+                @if (Model.id == 0)
+                {
+                    <partial name="_CreateAndBackToListButton" />
+                }
+                else
+                {
+                    <partial name="_EditAndBackToListButton" />
+                }
+            </div>
+        </div>
+    </div>
+</form>
+@section scripts{
+    <partial view="_ValidationScriptsPartial"></partial>
+}
